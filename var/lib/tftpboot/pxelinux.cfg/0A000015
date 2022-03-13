@@ -1,0 +1,5 @@
+default rocky-linux-8
+
+label rocky-linux-8
+    kernel rocky-linux-8/vmlinuz
+    append initrd=rocky-linux-8/initrd.img ip=dhcp inst.ks=http://10.0.0.30/ks/rocky-linux-8-ks.cfg

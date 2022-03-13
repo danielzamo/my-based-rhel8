@@ -1,0 +1,22 @@
+default vesamenu.c32
+prompt 1
+timeout 60
+
+display boot.msg
+
+label linux
+  menu label ^Install Rocky Linux 8
+  menu default
+  kernel rocky-linux-8/vmlinuz
+  append initrd=rocky-linux-8/initrd.img ip=dhcp inst.repo=http://10.0.0.30/rocky-linux-8
+label vesa
+  menu label Install CentOS 8 with ^basic video driver
+  kernel rocky-linux-8/vmlinuz
+  append initrd=rocky-linux-8/initrd.img ip=dhcp inst.xdriver=vesa nomodeset inst.repo=http://10.0.0.30/rocky-linux-8
+label rescue
+  menu label ^Rescue installed system
+  kernel rocky-linux-8/vmlinuz
+  append initrd=rocky-linux-8/initrd.img rescue
+label local
+  menu label Boot from ^local drive
+  localboot 0xffff

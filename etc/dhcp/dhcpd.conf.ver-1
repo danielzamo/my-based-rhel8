@@ -1,0 +1,23 @@
+#
+# DHCP Server Configuration file.
+#   see /usr/share/doc/dhcp-server/dhcpd.conf.example
+#   see dhcpd.conf(5) man page
+#
+option domain-name     "my-vmware.net";
+option domain-name-servers    8.8.8.8,8.8.4.4; 
+
+default-lease-time 600;
+max-lease-time 7200;
+#authoritative;
+no-authoritative;
+#
+subnet 10.0.0.0 netmask 255.255.255.0 {
+# specify the range of lease IP address
+    range dynamic-bootp 10.0.0.200 10.0.0.254;
+    # specify broadcast address
+    option broadcast-address 10.0.0.255;
+    # specify gateway
+    option routers 10.0.0.2;
+}
+
+
