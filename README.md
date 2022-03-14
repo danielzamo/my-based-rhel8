@@ -45,7 +45,9 @@ firewall-cmd --reload
 dnf -y install dhcp-server
 ```
 
-Para el servicio de DHCP se edita el fichero `/etc/dhcp/dhcpd.conf`. Ver archivo [dhcpd.conf]:./etc/dhcp/dhcpd.conf
+Para el servicio de DHCP se edita el fichero `/etc/dhcp/dhcpd.conf`. 
+
+Archivo: [dhcpd.conf](./etc/dhcp/dhcpd.conf)
 
 ```bash
 # Se editan diferentes ficheros. Los mismos son compartidos en este mismo repositorio. En este paso se edit el:
