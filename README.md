@@ -26,7 +26,7 @@ Actualmente en este repo comparto:
 - Actualizando el sistema e instalando algunos paquetes
 - PXE boot (arranque por red). 
   - Configuración servidor PXE
-  - Instalación vía red - arranque bios 
+  - Instalación vía red - arranque bios/estandar
   - Instalación vía red - arranque UEFI
 
 ## Actualizando el sistema e instalando algunos paquetes
@@ -69,7 +69,7 @@ sudo firewall-cmd --reload
 sudo cat /var/lib/dhcpd/dhcpd.leases
 ```
 
-## PXE boot : Instalación vía red - arranque bios
+## PXE boot : Instalación vía red - arranque bios/estandar
 
 ```bash
 sudo dnf -y install syslinux
@@ -90,58 +90,11 @@ sudo vim /var/lib/tftpboot/pxelinux.cfg/default
 
 Ver el archivo [.../default, compartido aquí](./var/lib/tftpboot/pxelinux.cfg/default) (_Este es la versión final actual_).
 
-## Se adjunta a continuación el historial de comandos ejecutados.
+### Servidor http
 
-Este trabajo aun no esta correctamente documentado.
+# Faltantes aun ....
 
-```bash
-systemctl disable --now sssd nis-domainname auditd
-sed -i.org -e 's/=enforcing/=disabled/g' /etc/selinux/config 
-# < Conf. PXE (Preboot eXecution Environment) >
-dnf -y install tftp-server 
-systemctl enable --now tftp.socket 
- firewall-cmd --add-service=tftp --permanent 
-firewall-cmd --reload
-#<setting server DHCP>
-dnf -y install dhcp-server 
-dnf install vim-enhanced
-vim /etc/profile
-source /etc/profile
-vi /etc/dhcp/dhcpd.conf 
-systemctl enable --now dhcpd
-firewall-cmd --add-service=dhcp --permanent 
-firewall-cmd --reload 
-
-# <PXE Boot : Network Installation>
-dnf -y install syslinux
-cp /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot/ -v
-mkdir -p /var/pxe/rocky-linux-8
-mkdir -p /var/lib/tftpboot/rocky-linux-8
-mkdir -p /var/lib/isos
-dnf install rsync
-mount -t iso9660 -o loop,ro /var/lib/isos/Rocky-8.5-x86_64-minimal.iso /var/pxe/rocky-linux-8
-lsblk 
-df -h
-cp /var/pxe/rocky-linux-8/images/pxeboot/{vmlinuz,initrd.img} /var/lib/tftpboot/rocky-linux-8/
-cp /usr/share/syslinux/{menu.c32,vesamenu.c32,ldlinux.c32,libcom32.c32,libutil.c32} /var/lib/tftpboot/ -v
-mkdir /var/lib/tftpboot/pxelinux.cfg
-vi /var/lib/tftpboot/pxelinux.cfg/default 
-mount -t iso9660 -o loop,ro /var/lib/isos/Rocky-8.5-x86_64-minimal.iso /var/pxe/rocky-linux-8
-# <install httpd>
-dnf -y install httpd
-mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf.org -v
-vim /etc/httpd/conf/httpd.conf 
-cp /etc/httpd/conf/httpd.conf{,.org}
-vim /etc/httpd/conf/httpd.conf
-systemctl enable --now httpd
-firewall-cmd --add-service=http --permanent && firewall-cmd --reload 
-# </install httpd>
-vi /var/www/html/index.html 
-vi /etc/hosts
-vi /etc/httpd/conf.d/pxeboot.conf
-systemctl restart httpd
-mkdir /var/www/html/ks
-vi /var/www/html/ks/rocky-linux-8-ks.cfg 
-printf "%02X" 10; printf "%02X" 0; printf "%02X" 0; printf "%02X\n" 21
-vi /var/lib/tftpboot/pxelinux.cfg/0A000015
-```
+- instalar http
+- configurar http
+- activar instalaciones desatendidas
+- instalar haciendo IP estatico
