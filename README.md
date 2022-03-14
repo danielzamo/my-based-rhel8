@@ -24,7 +24,7 @@ Las configuraciones mostradas aquí, deberían valer para sistemas Linux basados
 Actualmente en este repo comparto:
 
 - [Actualizando el sistema e instalando algunos paquetes](./paquetes.previos.md)
-- PXE boot (arranque por red). 
-  - Configuración servidor PXE
-  - Instalación vía red - arranque bios/estandar
-  - Instalación vía red - arranque UEFI
+- En [pxe.boot.md](./pxe.boot.md) se instala y configura PXE boot (arranque por red). En el se comparte como: 
+  - Configurar el servidor PXE
+  - Instalar vía red - arranque bios/estandar
+  - ~~Instalar vía red - con arranque UEFI FALTANTE DE IMPLEMENTAR~~
