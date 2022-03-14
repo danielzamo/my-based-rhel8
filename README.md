@@ -23,7 +23,7 @@ Las configuraciones mostradas aquí, deberían valer para sistemas Linux basados
 
 Actualmente en este repo comparto:
 
-- Actualizando el sistema e instalando algunos paquetes
+- [Actualizando el sistema e instalando algunos paquetes](./paquetes.previos.md)
 - PXE boot (arranque por red). 
   - Configuración servidor PXE
   - Instalación vía red - arranque bios/estandar
