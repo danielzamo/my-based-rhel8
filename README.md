@@ -39,21 +39,28 @@ firewall-cmd --reload
 
 ### Servidor DHCP
 
-#### Instalar servidor DHCP
+#### Instalar servidor DHCP (isc-dhcp)
 
 ```bash
 dnf -y install dhcp-server
 ```
 
-Para el servicio de DHCP se edita el fichero `/etc/dhcp/dhcpd.conf`. 
+Se edita el fichero `/etc/dhcp/dhcpd.conf`. 
 
-Archivo: [dhcpd.conf](./etc/dhcp/dhcpd.conf)
+Ver el archivo [dhcpd.conf, compartido aquí](./etc/dhcp/dhcpd.conf) (_Este es la versión final actual_).
 
 ```bash
-# Se editan diferentes ficheros. Los mismos son compartidos en este mismo repositorio. En este paso se edit el:
-## /etc/dhcp/dhcpd.conf
-systemctl restart dhcpd
+systemctl systemctl enable --now dhcpd
+firewall-cmd --add-service=dhcp --permanent
+firewall-cmd --reload
 ```
+
+**_Nota servicio DHCP:_** Las leases asignados pueden verse en:
+
+```bash
+cat /var/lib/dhcpd/dhcpd.leases
+```
+
 
 
 ## Se adjunta a continuación el historial de comandos ejecutados.
