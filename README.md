@@ -4,12 +4,12 @@
 
 En este repositorio comparto configuraciones de servicios y/o despliegues realizados sobre sistemas basados en la distribución Red Hat Enterprise Linux (RHEL) en su versión 8.
 
-Las configuraciones mostradas aquí, deberían valer para sistemas Linux basados en RHEL versión 8 (CentOS Strean 8, Oracle Linux 8, CentOS 8, Alma Linux 8, etc).
+Las configuraciones mostradas aquí, deberían valer para sistemas Linux basados en RHEL versión 8 (CentOS Strean 8, Oracle Linux 8, CentOS 8, Alma Linux 8, Rocky Linux 8, etc).
 
-**Consideraciones iniciales de este trabajo:** Todas las tareas para este repositorio y salvo que se indique expresamente, han sido realizadas sobre un servidor con Rocky Linux versión 8 (con las últimas actualizaciones aplicadas). Y se comparte aquí:
+**Consideraciones iniciales:** Todas las tareas para este repositorio y salvo que se indique expresamente, han sido realizadas sobre un servidor con Rocky Linux versión 8 (con las últimas actualizaciones aplicadas), y ejecutadas por el usuario normal, escalando a `root` mediante el comando `sudo`. Y se comparte aquí:
 
 - la indicación de los paquetes que se fueron instalando (según el servicio a configurar). 
-- se comparten los ficheros modificados, para que los servicios quedasen funcionales. Se intenta en todos los casos, compartir las diferentes versiones de los ficheros que han sido modificados.
+- se comparten los ficheros modificados y/o creados, hasta que el servicio quedo funcional. Se intenta en todos los casos, compartir las diferentes versiones de los ficheros que han sido modificados.
 
 ## Especificación del sistema utilizado
 
@@ -33,7 +33,7 @@ Actualmente en este repo comparto:
 ```bash
 dnf -y install tftp-server 
 systemctl enable --now tftp.socket 
- firewall-cmd --add-service=tftp --permanent 
+firewall-cmd --add-service=tftp --permanent 
 firewall-cmd --reload
 ```
 
@@ -43,7 +43,12 @@ firewall-cmd --reload
 
 ```bash
 dnf -y install dhcp-server
-# Se editan diferentes ficheros. Los mismos son compartidos en este mismo repositorio. En este paso se editan y/o agregan los siguientes:
+```
+
+Para el servicio de DHCP se edita el fichero `/etc/dhcp/dhcpd.conf`. Ver archivo [dhcpd.conf]:./etc/dhcp/dhcpd.conf
+
+```bash
+# Se editan diferentes ficheros. Los mismos son compartidos en este mismo repositorio. En este paso se edit el:
 ## /etc/dhcp/dhcpd.conf
 systemctl restart dhcpd
 ```
